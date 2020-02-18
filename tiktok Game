@@ -1,0 +1,79 @@
+theBoard = {1: ' ', 2: ' ', 3: ' ', 4: ' ', 5: ' ', 6: ' ', 7: ' ', 8: ' ', 9: ' '}
+def printBoard(board):
+    print(board[1] + '|' + board[2] + '|' + board[3])
+    print('-+-+-')
+    print(board[4] + '|' + board[5] + '|' + board[6])
+    print('-+-+-')
+    print(board[7] + '|' + board[8] + '|' + board[9])
+def winner(board):
+    for i in range(1,9,3):
+
+        if board[i] ==board[i+1] ==board[i+2]:
+            if board[i] == "X":
+                print("Player X won")
+                exit()
+            elif board[i] == "O":
+                print("Player Y Won")
+                exit()
+    for i in range(1,2):
+        if board[i] == board[i + 4] == board[i + 8]:
+            if board[i] =="X":
+                print("Player X won")
+                exit()
+            elif board[i] == "O":
+                print("Player Y Won")
+                printBoard(board)
+                exit()
+    for i in range(3,4):
+        if board[i] == board[i + 2] == board[i + 4]:
+            if board[i] =="X":
+                print("Player X won")
+                exit()
+            elif board[i] == "O":
+                print("Player Y Won")
+                printBoard(board)
+                exit()
+    for i in range(1,4):
+        if board[i] == board[i + 3] == board[i + 6]:
+            if board[i] =="X":
+                print("Player X won")
+                exit()
+            elif board[i] == "O":
+                print("Player Y Won")
+                printBoard(board)
+                exit()
+
+
+player1 = input("Chose your Choice X or O : ")
+turn = player1.upper()
+printBoard(theBoard)
+rep_check = list()
+for i in range(9):
+    try:
+        moves1 = int(input(" number : "))
+    except:
+        continue
+    if moves1 > 10:
+        print("Value can not be greater than 9")
+        continue
+    if moves1 in rep_check:
+        print("Already Chosen")
+        continue
+
+    if turn == "X":
+        theBoard[moves1]= "X"
+        turn = "O"
+        rep_check.append(moves1)
+        winner(theBoard)
+
+
+    else:
+        theBoard[moves1] = "O"
+        turn = "X"
+        rep_check.append(moves1)
+        winner(theBoard)
+
+    printBoard(theBoard)
+
+
+
